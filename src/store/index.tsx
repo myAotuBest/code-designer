@@ -38,17 +38,18 @@ export type ActionType = {
     key?: string;
     value: any;
     isRoot?: boolean;
+    id?: string; // 比如在右键操作时 没有操作选中的就用自己的传来的 id、否则默认用 state 里面的id
   };
 };
 
 const reducer = (state: IEditorProps, action: ActionType) => {
-  const { key, value, isRoot } = action.data || {};
+  const { key, value, isRoot, id } = action.data || {};
   console.log('key', key, 'value', value);
+  const currentElementId = (id || state.currentElement)
   const currentComponent = state.components.filter(
-    (item) => item.id === state.currentElement
+    (item) => item.id === currentElementId
   )[0];
   let components = [...state.components];
-
   switch (action.type) {
     case actionTypes.SETACTIVE:
       return {
@@ -56,9 +57,8 @@ const reducer = (state: IEditorProps, action: ActionType) => {
         currentElement: value,
       };
     case actionTypes.ADDCOMPONENT:
-      (value as IComponentData).layerName = `图层${
-        state.components.length + 1
-      }`;
+      (value as IComponentData).layerName = `图层${state.components.length + 1
+        }`;
       components = components.concat(value);
       return {
         ...state,
@@ -78,7 +78,7 @@ const reducer = (state: IEditorProps, action: ActionType) => {
     case actionTypes.UPDATECOMPONENT:
       let newData = [...state.components];
       newData = newData.map((data: IComponentData) => {
-        if (state.currentElement === data.id) {
+        if (currentElementId === data.id) {
           if (isRoot) {
             return {
               ...data,
@@ -132,7 +132,7 @@ const reducer = (state: IEditorProps, action: ActionType) => {
       // const [deleteComponet] = componentData.splice(index, 1)
       if (currentComponent) {
         components = components.filter(
-          (item) => item.id !== state.currentElement
+          (item) => item.id !== currentElementId
         );
         message.success('删除当前图层成功');
         return {
@@ -177,7 +177,7 @@ const reducer = (state: IEditorProps, action: ActionType) => {
         }
         // 进行属性合并
         components = components.map((data: IComponentData) => {
-          if (state.currentElement === data.id) {
+          if (currentElementId === data.id) {
             return {
               ...data,
               props: {

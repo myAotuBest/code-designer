@@ -182,6 +182,7 @@ const EditWrapper: React.FC<IProps> = (props) => {
     <div
       ref={editWrapper}
       id={'wrapper' + props.id}
+      data-component-id={props.id}
       className={classNames(
         styles['edit-wrapper'],
         props.active ? styles['active'] : '',

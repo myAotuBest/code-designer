@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { memo, useCallback, useContext, useEffect } from 'react';
 import { Layout, Tabs, Empty } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
 import HeaderBase from './header';
@@ -8,7 +8,7 @@ import PropsTable from '@/components/propsTable';
 import { IComponentData } from '@/store/context';
 import componentMap from '@/types/componentMap';
 import EditWrapper from '@/components/editWrapper';
-import initHotKeys from '@/plugins/hotKeys';
+import { initHotKeys, initContextMenu } from '@/plugins';
 import {
   SETACTIVE,
   ADDCOMPONENT,
@@ -40,6 +40,7 @@ const BaseLayout: React.FC = () => {
   const isHidden = currentComponentData?.isHidden;
 
   initHotKeys();
+  initContextMenu();
 
   // 设置当前选中元素
   const setActive = useCallback(
@@ -169,7 +170,7 @@ const BaseLayout: React.FC = () => {
               </div>
             </div>
           </Content>
-          <Sider theme="light" width={400} style={{ overflow: 'auto' }}>
+          <Sider theme="light" width={400} style={{ overflow: 'auto' }} className="pane-setting">
             <Tabs defaultActiveKey="1">
               <TabPane tab="组件属性" key="formProps">
                 {!isLocked ? (
@@ -209,4 +210,4 @@ const BaseLayout: React.FC = () => {
   );
 };
 
-export default BaseLayout;
+export default memo(BaseLayout);
