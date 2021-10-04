@@ -1,9 +1,5 @@
-import Design from '@/views/design';
-import Index from '@/views/home';
+import { lazy } from 'react';
 import NotFound from '@/views/not-found';
-import Layout from '@/views/layout';
-import Login from '@/views/login';
-import Detail from '@/views/detail';
 import { RouteProps } from 'react-router-dom';
 
 interface RouteConfig extends RouteProps {
@@ -11,7 +7,12 @@ interface RouteConfig extends RouteProps {
   redirect?: string;
 }
 
-export const routeConfig: RouteConfig[] = [
+const Login = lazy(() => import('@/views/login'))
+const Index = lazy(() => import('@/views/home'))
+const Detail = lazy(() => import('@/views/detail'))
+const Design = lazy(() => import('@/views/design'))
+
+export const routes: RouteConfig[] = [
   {
     path: '/',
     name: '首页',
@@ -22,13 +23,13 @@ export const routeConfig: RouteConfig[] = [
     path: '/index',
     name: '首页',
     component: Index,
-    // children: [
-    //   {
-    //     path: '/detail/:id',
-    //     name: '详情',
-    //     component: Detail
-    //   },
-    // ]
+    children: [
+      {
+        path: '/detail/:id',
+        name: '详情',
+        component: Detail
+      },
+    ]
   },
   {
     path: '/detail/:id',
@@ -38,7 +39,7 @@ export const routeConfig: RouteConfig[] = [
   {
     path: '/design',
     name: '设计',
-    component: Layout,
+    component: Design,
   },
   {
     path: '/login',

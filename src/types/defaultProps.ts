@@ -1,4 +1,4 @@
-import { mapValues, without } from 'lodash-es';
+import { without } from 'lodash-es';
 export interface CommonComponentProps {
   // actions
   actionType: string;
@@ -87,7 +87,7 @@ export const textDefaultProps: TextComponentProps = {
   color: '#000000',
   left: '0px',
   top: '0px',
-  // position: 'absolute'
+  position: 'absolute'
 };
 
 export const imageDefaultProps: ImageComponentProps = {

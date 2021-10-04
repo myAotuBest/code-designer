@@ -9,7 +9,7 @@ export default function initContextMenu() {
 
     const editorActions: ActionItem[] = [
         {
-            shortcut: 'command+c', text: "拷贝图层", action: (cid: string) => {
+            shortcut: '⌘C / Ctrl+C', text: "拷贝图层", action: (cid: string) => {
                 dispatch({
                     type: COPYCOMPONENT,
                     data: {
@@ -19,14 +19,14 @@ export default function initContextMenu() {
             }
         },
         {
-            shortcut: 'command+v', text: "粘贴图层", action: (cid: string) => {
+            shortcut: '⌘V / Ctrl+V', text: "粘贴图层", action: (cid: string) => {
                 dispatch({
                     type: PASTECOPIEDCOMPONENT,
                 });
             }
         },
         {
-            shortcut: 'command+backspace', text: "删除图层", action: (cid: string) => {
+            shortcut: 'Backspace / Delete', text: "删除图层", action: (cid: string) => {
                 dispatch({
                     type: DELETECOMPONENT,
                     data: {
@@ -36,7 +36,7 @@ export default function initContextMenu() {
             }
         },
         {
-            shortcut: 'esc', text: "取消选中", action: (cid: string) => {
+            shortcut: 'ESC', text: "取消选中", action: (cid: string) => {
                 dispatch({
                     type: SETACTIVE,
                     data: {
@@ -44,7 +44,17 @@ export default function initContextMenu() {
                     },
                 });
             }
-        }
+        },
+        {
+            shortcut: '⌘Z / Ctrl+Z', text: "撤销", action: (cid: string) => {
+                alert("待实现")
+            }
+        },
+        {
+            shortcut: ' ⌘⇧Z / Ctrl+Shift+Z', text: "重做", action: (cid: string) => {
+                alert("待实现")
+            }
+        },
     ]
 
     const settingAction: ActionItem[] = [

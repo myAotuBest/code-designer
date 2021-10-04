@@ -21,6 +21,11 @@ module.exports = {
     quiet: true,
     watchContentBase: true,
     inline: true,
+    // proxy: {
+    //   '/api': {
+    //     target: 'https://api.imooc-lego.com/',
+    //   },
+    // },
   },
   devtool: 'source-map',
   plugins: [

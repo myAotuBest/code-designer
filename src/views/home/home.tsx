@@ -1,20 +1,9 @@
-/*
- * @message: 描述
- * @Author: Roy
- * @Email: @163.com
- * @Github: @163.com
- * @Date: 2021-07-13 15:18:13
- * @LastEditors: Roy
- * @LastEditTime: 2021-07-13 15:19:08
- * @Deprecated: 否
- * @FilePath: /cybertron-designer/src/views/home/home.tsx
- */
 import React from 'react';
 import { Row, Col } from 'antd';
-import HomeHeader from '@/components/home/header';
-import TemplateList from '@/components/home/templateList';
+import HomeHeader from '@/views/home/components/header';
+import TemplateList from '@/views/home/components/templateList';
 import style from './index.less';
-import { TemplateProps } from '../../types/homeTemplist';
+import { TemplateProps } from '@/types/respType';
 interface Welcome {
   image: string;
   title: string;
