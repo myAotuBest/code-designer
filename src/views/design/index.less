@@ -1,0 +1,44 @@
+@height: 60px;
+
+.no-shrink {
+  flex-shrink: 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.toolBar {
+  border-bottom: 1px solid #a3a8b8;
+  height: @height;
+  flex-basis: @height;
+  .no-shrink();
+}
+
+.body {
+  display: flex;
+  flex-basis: calc(100vh - @height);
+  .no-shrink();
+  flex-grow: 1;
+  .left {
+    .no-shrink();
+    flex-basis: 300px;
+    border-right: 1px solid #f0f0f0;
+    :global {
+      .ant-tabs.ant-tabs-left {
+        height: 100%;
+      }
+    }
+  }
+  .center {
+    .no-shrink();
+    flex-grow: 1;
+  }
+  .right {
+    .no-shrink();
+    flex-basis: 300px;
+    border-left: 1px solid #f0f0f0;
+  }
+}

@@ -1,0 +1,15 @@
+.selected() {
+  position: relative;
+  outline: 1px solid #396fff;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    content: '未知';
+    background-color: #396fff;
+    color: #fff;
+    font-size: 12px;
+    transform: translate(-50%, 0) scale(0.8);
+  }
+}
