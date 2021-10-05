@@ -1,6 +1,16 @@
 .header {
-  background: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
+
+.logo-img {
+  width: 44px;
+  height: 44px;
+  margin-right: 20px;
+}
+
 .content {
   width: 375px;
   // height: 812px;
@@ -21,4 +31,13 @@
 }
 .component-item > * {
   position: static !important;
+}
+
+.page-title {
+  display: flex;
+}
+.page-title .inline-edit span {
+  font-weight: 500;
+  margin-left: 10px;
+  font-size: 16px;
 }

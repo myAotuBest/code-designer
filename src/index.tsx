@@ -8,9 +8,7 @@ import {
 } from 'react-router-dom';
 import EditorContext from '@/store/index';
 import { routes } from '@/router';
-import 'antd/dist/antd.css';
-import '@/styles/styles.less';
-import 'cropperjs/dist/cropper.css';
+import './styles'
 
 const App = (): React.ReactElement => {
   const routeComponents = routes.map((item) => {

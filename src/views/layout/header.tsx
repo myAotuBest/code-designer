@@ -1,20 +1,20 @@
-import React, { memo } from 'react';
-import { Button } from 'antd';
-import { saveComponentState } from '@/util/store';
+// import React, { memo } from 'react';
+// import { Button, Layout } from 'antd';
+// import { saveComponentState } from '@/util/store';
+// import styles from './index.less'
 
-// TODO
-// 保存、发布、前进、后退、真机预览、导出JSON、导出源代码、导出JSON 等
-const Header: React.FC<{ data: any }> = (props) => {
-  const saveStore = () => saveComponentState(props.data);
+// const { Header } = Layout
+// // TODO
+// // 保存、发布、前进、后退、真机预览、导出JSON、导出源代码、导出JSON 等
+// const Header: React.FC<{ data: any }> = (props) => {
+//   const saveStore = () => saveComponentState(props.data);
 
-  return (
-    <div>
-      导航操作栏
-      <Button type="primary" onClick={saveStore}>
-        保存
-      </Button>
-    </div>
-  );
-};
+//   return (
+//     <Header className={styles.header}>
+//       <div className="logo" />
+//       <HeaderBase data={state} />
+//     </Header>
+//   );
+// };
 
-export default memo(Header);
+// export default memo(Header);

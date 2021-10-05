@@ -65,6 +65,15 @@ const reducer = (state: IEditorProps, action: ActionType) => {
         components,
       };
     case actionTypes.UPDATEPAGE:
+      if (isRoot) {
+        return {
+          ...state,
+          page: {
+            ...state.page,
+            [key]: value
+          }
+        }
+      }
       return {
         ...state,
         page: {

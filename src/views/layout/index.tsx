@@ -1,9 +1,9 @@
 import React, { Fragment, memo, useCallback, useContext, useEffect } from 'react';
-import { Layout, Tabs, Empty } from 'antd';
-import { useParams } from "react-router-dom"
+import { Layout, Tabs, Empty, Menu, Button } from 'antd';
+import { Link, useParams } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid';
-import HeaderBase from './header';
 import EditGroup from './setting-area/edit';
+import LnlineEdit from "@/components/lnlineEdit"
 import LayerList from './setting-area/layer';
 import PropsTable from '@/components/propsTable';
 import { ComponentData } from '@/store/context';
@@ -12,7 +12,7 @@ import EditWrapper from '@/components/editWrapper';
 import LText from "@/components/widgets/LText"
 import { initHotKeys, initContextMenu } from '@/plugins';
 import { TextComponentProps } from "@/types/defaultProps"
-import { fetchWork } from "@/api"
+import { fetchWork, fetchSaveWork } from "@/api"
 import {
   SETACTIVE,
   ADDCOMPONENT,
@@ -115,23 +115,45 @@ const BaseLayout: React.FC = () => {
   );
 
   const updatePage = useCallback(
-    (key: string, value: any) => {
+    (key: string, value: any, isRoot = false) => {
       dispatch({
         type: UPDATEPAGE,
         data: {
           key,
           value,
+          isRoot
         },
       });
     },
     [page]
   );
 
+  const saveWork = useCallback(() => {
+    const { title, props } = page
+    const payload = {
+      title,
+      content: {
+        components: components,
+        props
+      }
+    }
+    fetchSaveWork(payload)
+  }, [page])
+
   return (
-    <Layout>
+    <Layout className="layout">
       <Header className={styles.header}>
-        <div className="logo" />
-        <HeaderBase data={state} />
+        <div className={styles["page-title"]}>
+          <Link to="/">
+            <img className={styles["logo-img"]} src={require('../../assets/qijiren.png')} />
+          </Link>
+          <LnlineEdit value={page.title} onChange={(title) => updatePage("title", title, true)} />
+        </div>
+        <Menu mode="horizontal" theme="dark">
+          <Menu.Item key="preview"><Button type="primary">预览和设置</Button></Menu.Item>
+          <Menu.Item key="saveWork"><Button type="primary" onClick={saveWork}>保存</Button></Menu.Item>
+          <Menu.Item key="publish"><Button type="primary">发布</Button></Menu.Item>
+        </Menu>
       </Header>
       <Content
         style={{ padding: '0 50px', height: 'calc(100vh - 64px - 70px)' }}

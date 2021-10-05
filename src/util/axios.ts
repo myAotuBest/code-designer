@@ -37,3 +37,7 @@ export function get(url: string, params?: object) {
 export function post(url: string, data?: object) {
     return instance.post(url, data, { method: "post" })
 }
+
+export function patch(url: string, data: object) {
+    return instance.patch(url, data, { method: "patch" })
+}

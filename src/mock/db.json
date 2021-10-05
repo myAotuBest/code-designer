@@ -6,7 +6,7 @@
       "author": "typicode"
     }
   ],
-  "templates":[
+  "templates": [
     {
       "id": 7,
       "uuid": "339e",
@@ -219,7 +219,7 @@
   "profile": {
     "name": "typicode"
   },
-  "works":{
+  "works": {
     "errno": 0,
     "data": {
       "id": 5101,
@@ -420,6 +420,178 @@
         "createdAt": "2021-10-04T08:21:20.121Z",
         "updatedAt": "2021-10-04T08:22:20.304Z",
         "__v": 0
+      }
+    },
+    "title": "未命名作品-复制",
+    "content": {
+      "components": [
+        {
+          "name": "l-image",
+          "props": {
+            "imageSrc": "http://static.imooc-lego.com/upload-files/%E4%BA%8C%E7%BB%B4%E7%A0%81-324016.png",
+            "actionType": "",
+            "url": "",
+            "height": "85px",
+            "width": "85px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "paddingBottom": "0px",
+            "borderStyle": "none",
+            "borderColor": "#000",
+            "borderWidth": "0",
+            "borderRadius": "0",
+            "boxShadow": "0 0 0 #000000",
+            "opacity": 1,
+            "position": "absolute",
+            "left": "26.741455078125px",
+            "top": "560px",
+            "right": "0"
+          },
+          "id": "7faafd32-4e12-4659-aac1-ca7752fb1024",
+          "layerName": "图层1"
+        },
+        {
+          "name": "l-text",
+          "props": {
+            "text": "保持开心",
+            "fontSize": "60px",
+            "fontFamily": "\"FangSong\",\"STFangsong\"",
+            "fontWeight": "bold",
+            "fontStyle": "italic",
+            "textDecoration": "none",
+            "lineHeight": "1",
+            "textAlign": "center",
+            "color": "#ffffff",
+            "backgroundColor": "",
+            "actionType": "",
+            "url": "",
+            "height": "68.15341186523438px",
+            "width": "288.4375px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "paddingBottom": "0px",
+            "borderStyle": "none",
+            "borderColor": "#000",
+            "borderWidth": "0",
+            "borderRadius": "0",
+            "boxShadow": "0 0 0 #000000",
+            "opacity": 1,
+            "position": "absolute",
+            "left": "34.869293212890625px",
+            "top": "121.82101440429688px",
+            "right": "0",
+            "tag": "p"
+          },
+          "id": "db1f4403-06c6-48bf-8d1f-ae4bee34810c",
+          "layerName": "图层2"
+        },
+        {
+          "name": "l-text",
+          "props": {
+            "text": "2020/11.23\n星期一",
+            "fontSize": "18px",
+            "fontFamily": "",
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "textDecoration": "none",
+            "lineHeight": "1.5",
+            "textAlign": "center",
+            "color": "#ffffff",
+            "backgroundColor": "",
+            "actionType": "",
+            "url": "",
+            "height": "58.19602966308594px",
+            "width": "114.227294921875px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "paddingBottom": "0px",
+            "borderStyle": "none",
+            "borderColor": "#000",
+            "borderWidth": "0",
+            "borderRadius": "0",
+            "boxShadow": "0 0 0 #000000",
+            "opacity": 1,
+            "position": "absolute",
+            "left": "24.19598388671875px",
+            "top": "22.940338134765625px",
+            "right": "0",
+            "tag": "p"
+          },
+          "id": "c68a4464-8393-46c6-8ae1-11029eb64989",
+          "layerName": "图层3"
+        },
+        {
+          "name": "l-text",
+          "props": {
+            "text": "你可以听很丧的歌\n但我 希望你看看外面的太阳、\n星星 月亮 行人\n数目 花香 雨滴 动物 \n看到 这个世界上也是有亮晶晶的\n保持开心呀 ~\n早安~",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontWeight": "normal",
+            "fontStyle": "normal",
+            "textDecoration": "none",
+            "lineHeight": "2.1",
+            "textAlign": "left",
+            "color": "#ab1c1c",
+            "backgroundColor": "",
+            "actionType": "",
+            "url": "",
+            "height": "213.133544921875px",
+            "width": "222.69888305664062px",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "paddingBottom": "0px",
+            "borderStyle": "none",
+            "borderColor": "#000",
+            "borderWidth": "0",
+            "borderRadius": "0",
+            "boxShadow": "0 0 0 #000000",
+            "opacity": 1,
+            "position": "absolute",
+            "left": "70.5px",
+            "top": "239.890625px",
+            "right": "0",
+            "tag": "p"
+          },
+          "id": "f25054da-bc64-4669-95c3-bc784b108253",
+          "layerName": "图层4"
+        },
+        {
+          "name": "l-image",
+          "props": {
+            "imageSrc": "http://static.imooc-lego.com/upload-files/%E6%85%95%E8%AF%BE%E7%BD%91%20%E9%80%8F%E6%98%8ELOGO(%E7%BA%AFlogo)-231752.png",
+            "actionType": "",
+            "url": "",
+            "height": "45px",
+            "width": "",
+            "paddingLeft": "0px",
+            "paddingRight": "0px",
+            "paddingTop": "0px",
+            "paddingBottom": "0px",
+            "borderStyle": "none",
+            "borderColor": "#000",
+            "borderWidth": "0",
+            "borderRadius": "0",
+            "boxShadow": "0 0 0 #000000",
+            "opacity": 1,
+            "position": "absolute",
+            "left": "305.647705078125px",
+            "top": "21.91192626953125px",
+            "right": "0"
+          },
+          "id": "de344960-4555-49d4-a771-92fbd1086c81",
+          "layerName": "图层5"
+        }
+      ],
+      "props": {
+        "backgroundColor": "#ffffff",
+        "backgroundImage": "url('http://static.imooc-lego.com/upload-files/%E5%B9%BC%E5%84%BF%E5%9B%AD%E8%83%8C%E6%99%AF%E5%9B%BE-693141.jpg')",
+        "backgroundRepeat": "no-repeat",
+        "backgroundSize": "cover",
+        "height": "666.6666666666666px"
       }
     }
   }

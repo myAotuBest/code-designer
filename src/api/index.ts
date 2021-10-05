@@ -1,4 +1,4 @@
-import { get, post } from "@/util/axios"
+import { get, post, patch } from "@/util/axios"
 
 // 获取模版列表
 export const getTemplates = (params) => get("/templates", params)
@@ -8,3 +8,5 @@ export const loginByPhoneNumber = (data) => post("/users/loginByPhoneNumber", da
 export const getUserInfo = () => get("/users/getUserInfo")
 // 获取画布信息
 export const fetchWork = (id?: string) => get(`/works`)
+// 保存画布信息
+export const fetchSaveWork = (data: object, id?: string) => patch("works", data)
