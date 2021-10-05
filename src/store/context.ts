@@ -67,7 +67,7 @@ export interface IEditorProps {
   cachedOldValues: any;
   // 保存最多历史条目记录数
   maxHistoryNumber: number;
-  // 数据是否有修改
+  // 数据是否有修改 添加、修改、移动组件、修改page等操作都是
   isDirty: boolean;
   // 当前 work 的 channels
   // channels: ChannelProps[];

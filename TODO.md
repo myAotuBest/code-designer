@@ -17,3 +17,5 @@ jest
 - 全局 loading 设置、按钮 loading 设置
 - token 设置
 - 接口权限
+- 路由拦截
+- 自动保存（定时器）

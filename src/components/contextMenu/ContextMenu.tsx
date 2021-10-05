@@ -44,6 +44,7 @@ const ContextMenu: FC<IProps> = (props) => {
             className={styles['menu-container']}
             ref={menuRef}
             id="menuContainer"
+            style={{ display: "none" }}
         >
             {props.actions.map((item, index) => {
                 return (

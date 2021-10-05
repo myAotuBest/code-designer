@@ -1,6 +1,6 @@
 import React, { Fragment, memo, useCallback, useContext, useEffect } from 'react';
 import { Layout, Tabs, Empty, Menu, Button } from 'antd';
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, withRouter, Prompt } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid';
 import EditGroup from './setting-area/edit';
 import LnlineEdit from "@/components/lnlineEdit"
@@ -249,4 +249,21 @@ const BaseLayout: React.FC = () => {
   );
 };
 
-export default memo(BaseLayout);
+const RouterLeave = () => {
+  // useEffect(() => {
+  //   const listener = ev => {
+  //     ev.preventDefault();
+  //     ev.returnValue = '文章要保存吼，确定离开吗？';
+  //   };
+  //   window.addEventListener('beforeunload', listener);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', listener)
+  //   }
+  // }, []);
+  return (<Fragment>
+    <BaseLayout />
+    <Prompt when={true} message="信息未保存、确定离开吗?"></Prompt>
+  </Fragment>)
+}
+
+export default RouterLeave;

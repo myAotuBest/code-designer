@@ -3,7 +3,6 @@ import { cloneDeep } from 'lodash-es';
 import { v4 as uuidv4 } from 'uuid';
 import { message } from 'antd';
 import { AppContext, IEditorProps } from './context';
-import { getComponentState } from '@/util/store';
 import { ComponentData } from './context';
 import * as actionTypes from './contant';
 
@@ -15,8 +14,6 @@ const pageDefaultProps = {
   height: '560px',
 };
 export type MoveDirection = 'Up' | 'Down' | 'Left' | 'Right';
-
-// const cacheData: IEditorProps = getComponentState();
 
 const initState: IEditorProps = {
   components: [],

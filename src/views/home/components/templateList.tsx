@@ -16,7 +16,7 @@ const TemplateList: React.FC<IProps> = (props) => {
         {props.templateList.length && props.templateList.map((item: TemplateProps) => {
           return (
             <Col key={item.id} span={6} className={style.poster}>
-              <Link to="/">
+              <>
                 <Card
                   hoverable
                   cover={
@@ -40,7 +40,7 @@ const TemplateList: React.FC<IProps> = (props) => {
                     }
                   ></Meta>
                 </Card>
-              </Link>
+              </>
             </Col>
           );
         })}

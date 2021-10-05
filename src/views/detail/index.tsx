@@ -7,7 +7,7 @@ import './index.less';
 
 const Detail: React.FC = () => {
 
-  const [template, setTemplate] = useState<TemplateProps>()
+  const [template, setTemplate] = useState<TemplateProps>({} as TemplateProps)
 
   const download = () => { };
   return (
@@ -30,7 +30,7 @@ const Detail: React.FC = () => {
             <canvas id="barcode-container"></canvas>
           </div>
           <div className="use-button">
-            <Link to="/editor">
+            <Link to="/design/1">
               <Button type="primary" size="large">
                 使用模版
               </Button>

@@ -20,6 +20,8 @@ instance.interceptors.response.use((response) => {
     // store.finishLoading({status:true,message})
     const { data } = response
     const { errno, message } = data
+    console.log(data);
+
     if (errno !== 0) {
         // store.setError({status:true,message}) 设置全局错误
         return Promise.reject(data)
