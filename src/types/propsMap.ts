@@ -48,6 +48,7 @@ const pxToNumberHandler: PropToForm = {
 };
 
 export const mapPropsToForms: PropsToForms = {
+  // textComponentProps
   text: {
     text: '文本',
     component: TextArea,
@@ -55,15 +56,71 @@ export const mapPropsToForms: PropsToForms = {
     extraProps: { rows: 3 },
     afterTransform: (e: any) => e.target.value,
   },
-  url: {
-    component: Input,
-    afterTransform: (e: any) => e.target.value,
-    text: '链接地址',
-  },
   fontSize: {
     text: '字号',
     ...pxToNumberHandler,
   },
+  lineHeight: {
+    text: '行高',
+    component: Slider,
+    extraProps: { min: 0, max: 3, step: 0.1 },
+    initalTransform: (v: string) => parseFloat(v),
+    afterTransform: (e: number) => e.toString(),
+  },
+  textAlign: {
+    component: Group,
+    subComponent: Radio,
+    text: '对齐',
+    options: [
+      { value: 'left', text: '左' },
+      { value: 'center', text: '中' },
+      { value: 'right', text: '右' },
+    ],
+    afterTransform: (e: any) => e.target.value,
+  },
+  fontFamily: {
+    component: Select,
+    subComponent: Option,
+    text: '字体',
+    options: [{ value: '', text: '无' }, ...fontFamilyOptions],
+  },
+  // fontWeight: {
+  //   component: 'icon-switch',
+  //   initalTransform: (v: string) => v === 'bold',
+  //   afterTransform: (e: boolean) => e ? 'bold' : 'normal',
+  //   valueProp: 'checked',
+  //   extraProps: { iconName: 'BoldOutlined', tip: '加粗' }
+  // },
+  // fontStyle: {
+  //   component: 'icon-switch',
+  //   initalTransform: (v: string) => v === 'italic',
+  //   afterTransform: (e: boolean) => e ? 'italic' : 'normal',
+  //   valueProp: 'checked',
+  //   extraProps: { iconName: 'ItalicOutlined', tip: '斜体' }
+  // },
+  // textDecoration: {
+  //   component: 'icon-switch',
+  //   initalTransform: (v: string) => v === 'underline',
+  //   afterTransform: (e: boolean) => e ? 'underline' : 'none',
+  //   valueProp: 'checked',
+  //   extraProps: { iconName: 'UnderlineOutlined', tip: '下划线' }
+  // },
+  color: {
+    component: SketchPicker,
+    text: '字体颜色',
+    valueProp: 'color',
+  },
+  backgroundColor: {
+    component: SketchPicker,
+    text: '背景颜色',
+    valueProp: 'color',
+  },
+  // imageComponentProps
+  src: {
+    component: Upload,
+    valueProp: 'src',
+  },
+  // commonComponentProps - sizes
   width: {
     text: '宽度',
     ...pxToNumberHandler,
@@ -87,47 +144,6 @@ export const mapPropsToForms: PropsToForms = {
   paddingBottom: {
     ...pxToNumberHandler,
     text: '下边距',
-  },
-  left: {
-    ...pxToNumberHandler,
-    text: 'X',
-  },
-  top: {
-    ...pxToNumberHandler,
-    text: 'Y',
-  },
-  lineHeight: {
-    text: '行高',
-    component: Slider,
-    extraProps: { min: 0, max: 30, step: 1 },
-    initalTransform: (v: string) => parseInt(v),
-    afterTransform: (e: number) => (e ? `${e}px` : ''),
-  },
-  opacity: {
-    text: '透明度',
-    component: Slider,
-    extraProps: {
-      disabled: true,
-    },
-    initalTransform: (v: string) => parseFloat(v) * 100,
-    afterTransform: (v: string) => parseFloat((Number(v) / 100).toString()),
-  },
-  textAlign: {
-    component: Group,
-    subComponent: Radio,
-    text: '对齐',
-    options: [
-      { value: 'left', text: '左' },
-      { value: 'center', text: '中' },
-      { value: 'right', text: '右' },
-    ],
-    afterTransform: (e: any) => e.target.value,
-  },
-  fontFamily: {
-    component: Select,
-    subComponent: Option,
-    text: '字体',
-    options: [{ value: '', text: '无' }, ...fontFamilyOptions],
   },
   // commonComponentProps - border type
   borderStyle: {
@@ -161,19 +177,46 @@ export const mapPropsToForms: PropsToForms = {
     text: '边框圆角',
     extraProps: { min: 0, max: 200 },
   },
-  color: {
-    component: SketchPicker,
-    text: '字体颜色',
-    valueProp: 'color',
+  // commonComponentProps - opacity and boxShadow
+  opacity: {
+    text: '透明度',
+    component: Slider,
+    initalTransform: (v: number) => v ? v * 100 : 100,
+    afterTransform: (v: number) => v / 100,
+    extraProps: { min: 0, max: 100, reverse: true },
   },
-  backgroundColor: {
-    component: SketchPicker,
-    text: '背景颜色',
-    valueProp: 'color',
+  // boxShadow: {
+  //   component: 'shadow-picker'
+  // },
+  // commonComponentProps - positions
+  left: {
+    ...pxToNumberHandler,
+    text: 'X轴坐标',
   },
-  src: {
-    component: Upload,
-    valueProp: 'src',
+  top: {
+    ...pxToNumberHandler,
+    text: 'Y轴坐标',
+  },
+  // commonComponentProps - actions and urls
+  // actions
+  actionType: {
+    component: Select,
+    subComponent: Option,
+    text: '点击',
+    options: [
+      { value: '', text: '无' },
+      { value: 'to', text: '跳转到 URL' }
+    ],
+    extraProps: {
+      style: {
+        width: '120px',
+      },
+    }
+  },
+  url: {
+    component: Input,
+    afterTransform: (e: any) => e.target.value,
+    text: '链接地址',
   },
   backgroundImage: {
     text: '背景图片',

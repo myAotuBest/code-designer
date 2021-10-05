@@ -1,4 +1,4 @@
-import { memo, createElement } from 'react';
+import { memo, createElement, FC } from 'react';
 import useComponentCommon from '@/hooks/useComponentCommon';
 import {
   TextComponentProps,
@@ -6,11 +6,10 @@ import {
   textStylePropNames,
 } from '@/types/defaultProps';
 
-const TextWidget = (props: TextComponentProps) => {
+type IProps = { tag?: string } & TextComponentProps
+
+const TextWidget: FC<IProps> = (props) => {
   let { tag, text } = props;
-  if (!tag) {
-    tag = 'div';
-  }
   const { styleProps, handleClick } = useComponentCommon(
     props,
     textStylePropNames
@@ -26,5 +25,6 @@ const TextWidget = (props: TextComponentProps) => {
 };
 TextWidget.defaultProps = {
   ...textDefaultProps,
+  tag: "div"
 };
 export default memo(TextWidget);

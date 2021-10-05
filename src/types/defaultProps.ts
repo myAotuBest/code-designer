@@ -18,7 +18,6 @@ export interface CommonComponentProps {
   // shadow and opacity
   boxShadow: string;
   opacity: string;
-  backgroundColor: string;
   // position and x,y
   position: string;
   left: string;
@@ -30,8 +29,8 @@ export const commonDefaultProps: CommonComponentProps = {
   actionType: '',
   url: '',
   // size
-  height: '100px',
-  width: '318px',
+  height: '',
+  width: '373px',
   paddingLeft: '0px',
   paddingRight: '0px',
   paddingTop: '0px',
@@ -44,24 +43,23 @@ export const commonDefaultProps: CommonComponentProps = {
   // shadow and opacity
   boxShadow: '0 0 0 #000000',
   opacity: '1',
-  backgroundColor: 'green',
   // position and x,y
-  position: 'relative',
+  position: 'absolute',
   left: '0',
   top: '0',
-  right: '0',
+  right: '0'
 };
 export interface TextComponentProps extends CommonComponentProps {
-  tag: string;
   text: string;
   fontSize: string;
   fontFamily: string;
-  fontWeight: number;
+  fontWeight: string;
   fontStyle: string;
   textDecoration: string;
   lineHeight: string;
   textAlign: string;
   color: string;
+  backgroundColor: string;
 }
 
 export interface ImageComponentProps extends CommonComponentProps {
@@ -72,22 +70,17 @@ export type AllComponentProps = TextComponentProps & ImageComponentProps;
 
 export const textDefaultProps: TextComponentProps = {
   // basic props - font styles
-  ...commonDefaultProps,
-  height: '100px',
-  width: '100%',
-  tag: 'div',
-  text: '文本内容',
+  text: '正文内容',
   fontSize: '14px',
   fontFamily: '',
-  fontWeight: 400,
+  fontWeight: 'normal',
   fontStyle: 'normal',
   textDecoration: 'none',
   lineHeight: '1',
   textAlign: 'left',
   color: '#000000',
-  left: '0px',
-  top: '0px',
-  position: 'absolute'
+  backgroundColor: '',
+  ...commonDefaultProps
 };
 
 export const imageDefaultProps: ImageComponentProps = {
@@ -100,14 +93,11 @@ export const textStylePropNames: string[] = without(
   'actionType',
   'url',
   'text',
-  'tag'
 );
 
 export const imageStylePropsNames: string[] = without(
   Object.keys(textDefaultProps),
   'actionType',
   'url',
-  'text',
-  'tag',
   'src'
 );

@@ -1,7 +1,6 @@
 import Reat from 'react';
 import TextWidget from '@/components/widgets/LText';
-import ContainerWidget from '@/components/widgets/container';
-import ImageWidget from '@/components/widgets/image';
+import ImageWidget from '@/components/widgets/LImage';
 import ListWidget from '@/components/widgets/list';
 
 type IComponentType = {
@@ -15,10 +14,6 @@ export interface IComponentToFrom {
 
 // 组件、name 映射关系、实现 Vue 的 component.is
 const componentMap: IComponentToFrom = {
-  'container-widget': {
-    name: '容器组件组件',
-    component: ContainerWidget,
-  },
   'l-text': {
     name: '文本组件',
     component: TextWidget,

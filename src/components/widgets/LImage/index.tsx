@@ -1,10 +1,11 @@
 import React from 'react';
+import useComponentCommon from '@/hooks/useComponentCommon';
 import {
   ImageComponentProps,
   imageStylePropsNames,
-  textDefaultProps,
+  imageDefaultProps
 } from '@/types/defaultProps';
-import useComponentCommon from '@/hooks/useComponentCommon';
+import './index.less'
 
 const ImageWidget = (props: ImageComponentProps) => {
   const { styleProps, handleClick } = useComponentCommon(
@@ -13,12 +14,12 @@ const ImageWidget = (props: ImageComponentProps) => {
   );
 
   return (
-    <img src={props.src} style={{ ...styleProps }} onClick={handleClick} />
+    <img src={props.src} style={{ ...styleProps }} onClick={handleClick} className="l-image-component" />
   );
 };
 
 ImageWidget.defaultProps = {
-  ...textDefaultProps,
+  ...imageDefaultProps,
 };
 
 export default ImageWidget;

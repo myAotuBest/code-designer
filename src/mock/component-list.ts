@@ -1,49 +1,41 @@
-import { v4 as uuidv4 } from 'uuid';
-import { ComponentData } from '@/store/context';
-import {
-  commonDefaultProps,
-  imageDefaultProps,
-  textDefaultProps,
-} from '@/types/defaultProps';
+import { textDefaultProps } from '@/types/defaultProps';
+const defaultTextTemplates = [
+  {
+    text: '大标题',
+    fontSize: '30px',
+    fontWeight: 'bold',
+    tag: 'h2',
+    width: '100px',
+  },
+  {
+    text: '正文内容',
+    tag: 'p',
+    width: '100px',
+  },
+  {
+    text: '链接内容',
+    color: '#1890ff',
+    textDecoration: 'underline',
+    tag: 'p',
+    width: '100px',
+  },
+  {
+    text: '按钮内容',
+    color: '#ffffff',
+    backgroundColor: '#1890ff',
+    borderWidth: '1px',
+    borderColor: '#1890ff',
+    borderStyle: 'solid',
+    borderRadius: '2px',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+    paddingTop: '5px',
+    paddingBottom: '5px',
+    width: '100px',
+    tag: 'button',
+    textAlign: 'center',
+    position: 'absolute',
+  }
+]
 
-const mockComponentList: Array<ComponentData> = [
-  {
-    id: uuidv4(),
-    name: '容器',
-    type: 'container-widget', // ContainerWidget ro container-widget
-    icon: 'BuildOutlined',
-    props: {
-      ...commonDefaultProps,
-    },
-  },
-  {
-    id: uuidv4(),
-    name: '文本',
-    type: 'l-text',
-    icon: 'BuildOutlined',
-    props: {
-      ...textDefaultProps,
-    },
-  },
-  {
-    id: uuidv4(),
-    name: '按钮',
-    type: 'l-text',
-    icon: 'BuildOutlined',
-    props: {
-      ...textDefaultProps,
-      tag: 'button',
-    },
-  },
-  {
-    id: uuidv4(),
-    name: '图片',
-    type: 'l-image',
-    icon: 'BuildOutlined',
-    props: {
-      ...imageDefaultProps,
-    },
-  },
-];
-
-export default mockComponentList;
+export default defaultTextTemplates.map(template => ({ ...textDefaultProps, ...template }))

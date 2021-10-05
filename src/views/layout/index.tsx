@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useContext, useEffect } from 'react';
+import React, { Fragment, memo, useCallback, useContext, useEffect } from 'react';
 import { Layout, Tabs, Empty } from 'antd';
 import { useParams } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid';
@@ -9,7 +9,9 @@ import PropsTable from '@/components/propsTable';
 import { ComponentData } from '@/store/context';
 import componentMap from '@/types/componentMap';
 import EditWrapper from '@/components/editWrapper';
+import LText from "@/components/widgets/LText"
 import { initHotKeys, initContextMenu } from '@/plugins';
+import { TextComponentProps } from "@/types/defaultProps"
 import { fetchWork } from "@/api"
 import {
   SETACTIVE,
@@ -31,7 +33,6 @@ const { TabPane } = Tabs;
 const BaseLayout: React.FC = () => {
   const { state, dispatch } = useContext<IContextProps>(AppContext);
   const { currentElement, components, page } = state;
-  console.log("components", components);
 
   let filterComponents: ComponentData[] =
     components.filter((data: ComponentData) => data.id === currentElement) ||
@@ -72,15 +73,13 @@ const BaseLayout: React.FC = () => {
     [currentElement, components]
   );
 
-  const addComponent = useCallback((item: ComponentData) => {
-    console.log(item);
+  const addComponent = useCallback((props: TextComponentProps) => {
     const component: ComponentData = {
       id: uuidv4(),
       props: {
-        ...item.props,
+        ...props,
       },
-      type: item.type,
-      name: item.name,
+      name: 'l-text',
     };
     dispatch({
       type: ADDCOMPONENT,
@@ -141,15 +140,15 @@ const BaseLayout: React.FC = () => {
           className="site-layout-background"
           style={{ padding: '24px 0', height: '100%' }}
         >
-          <Sider theme="light" width={400} className={styles.componentList}>
-            {mockComponentList.map((item: ComponentData) => {
+          <Sider theme="light" width={300} className={styles.componentList}>
+            {mockComponentList.map((item: TextComponentProps, index) => {
               return (
                 <div
-                  key={item.id}
-                  className={styles.name}
+                  key={index}
+                  className={styles['component-item']}
                   onClick={() => addComponent(item)}
                 >
-                  {item.name}
+                  <LText {...item} />
                 </div>
               );
             })}
@@ -162,7 +161,6 @@ const BaseLayout: React.FC = () => {
             }}
           >
             <div className={styles.content}>
-              {/* {activeCurrentElement ? contextmenuList() : null} */}
               <div
                 className={styles['canvas-area']}
                 style={{ ...page.props }}
@@ -187,22 +185,24 @@ const BaseLayout: React.FC = () => {
               </div>
             </div>
           </Content>
-          <Sider theme="light" width={400} style={{ overflow: 'auto' }} className="pane-setting">
+          <Sider theme="light" width={300} style={{ overflow: 'auto' }} className="pane-setting">
             <Tabs defaultActiveKey="1">
               <TabPane tab="组件属性" key="formProps">
-                {!isLocked ? (
-                  <EditGroup
-                    currentElement={currentElement}
-                    updateComponent={updateComponent}
-                    props={currentComponentData?.props}
-                  />
-                ) : (
-                  <Empty
-                    description={
-                      isHidden ? '已隐藏，暂无法编辑' : '已锁定，暂无法编辑'
-                    }
-                  />
-                )}
+                {currentElement && <Fragment>
+                  {!isLocked ? (
+                    <EditGroup
+                      currentElement={currentElement}
+                      updateComponent={updateComponent}
+                      props={currentComponentData?.props}
+                    />
+                  ) : (
+                    <Empty
+                      description={
+                        isHidden ? '已隐藏，暂无法编辑' : '已锁定，暂无法编辑'
+                      }
+                    />
+                  )}
+                </Fragment>}
               </TabPane>
               <TabPane tab="图层设置" key="layer">
                 <LayerList

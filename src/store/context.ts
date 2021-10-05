@@ -32,12 +32,10 @@ export interface PageData {
 export interface ComponentData {
   /** uuid v4 生成 */
   id: string;
-  /** 和mock里面的类型对应 也就是 React.createElement<tag> */
-  type: string;
   /** 图标*/
   icon?: string;
   /** 组件名 */
-  name: string;
+  name: 'l-text' | 'l-image' | 'l-shape';
   /** 标签名 可能一个组件有N种不同类型的组件 */
   tag?: string;
   /** 图层名称 */

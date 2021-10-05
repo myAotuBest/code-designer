@@ -14,18 +14,11 @@
   position: relative;
 }
 
-.componentList {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .name {
-    border: 1px solid forestgreen;
-    border-radius: 10px;
-    width: 75px;
-    height: 35px;
-    margin-bottom: 20px;
-    text-align: center;
-    line-height: 35px;
-    font-size: 14px;
-  }
+.component-item {
+  width: 100px;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+.component-item > * {
+  position: static !important;
 }

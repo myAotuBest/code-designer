@@ -4,7 +4,9 @@ import { reduce } from 'lodash-es';
 import { mapPropsToForms, FormProps, PropToForm } from '@/types/propsMap';
 import { AllFormProps } from '@/store/context';
 import { firstToUpper } from '@/util';
+import classNames from 'classnames/bind'
 import styles from './index.less';
+var cx = classNames.bind(styles);
 
 interface IProps {
   props: any;
@@ -73,13 +75,14 @@ const Index: React.FC<IProps> = (props) => {
             ...events,
           };
           return (
-            <Fragment key={key}>
+            <div key={key} className={cx({ 'no-text': !values.text })}>
               {Component && (
                 <Row className={styles['prop-item']}>
-                  <label className={styles.label}>{values.text}</label>
-                  <Component {...domProps}>
-                    {options && options.length
-                      ? options.map((option) => {
+                  <label className={styles["label"]}>{values.text}</label>
+                  <div className={cx(styles['prop-component'], styles[`component-${value.component}`])}>
+                    <Component {...domProps}>
+                      {options && options.length
+                        ? options.map((option) => {
                           return (
                             <SubComponent
                               value={option.value}
@@ -89,14 +92,15 @@ const Index: React.FC<IProps> = (props) => {
                             </SubComponent>
                           );
                         })
-                      : null}
-                  </Component>
+                        : null}
+                    </Component>
+                  </div>
                 </Row>
               )}
-            </Fragment>
+            </div>
           );
         })}
-    </div>
+    </div >
   );
 };
 
