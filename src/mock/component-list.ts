@@ -1,12 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
-import { IComponentData } from '@/store/context';
+import { ComponentData } from '@/store/context';
 import {
   commonDefaultProps,
   imageDefaultProps,
   textDefaultProps,
 } from '@/types/defaultProps';
 
-const mockComponentList: Array<IComponentData> = [
+const mockComponentList: Array<ComponentData> = [
   {
     id: uuidv4(),
     name: '容器',
@@ -19,7 +19,7 @@ const mockComponentList: Array<IComponentData> = [
   {
     id: uuidv4(),
     name: '文本',
-    type: 'text-widget',
+    type: 'l-text',
     icon: 'BuildOutlined',
     props: {
       ...textDefaultProps,
@@ -28,7 +28,7 @@ const mockComponentList: Array<IComponentData> = [
   {
     id: uuidv4(),
     name: '按钮',
-    type: 'text-widget',
+    type: 'l-text',
     icon: 'BuildOutlined',
     props: {
       ...textDefaultProps,
@@ -38,7 +38,7 @@ const mockComponentList: Array<IComponentData> = [
   {
     id: uuidv4(),
     name: '图片',
-    type: 'image-widget',
+    type: 'l-image',
     icon: 'BuildOutlined',
     props: {
       ...imageDefaultProps,

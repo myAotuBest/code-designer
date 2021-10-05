@@ -214,7 +214,7 @@ class SchemaService implements SchemaOperator {
         children: [],
       };
     },
-    'text-widget': (data: { type: any }) => {
+    'l-text': (data: { type: any }) => {
       return {
         id: uuid(),
         type: data.type,
@@ -232,7 +232,7 @@ class SchemaService implements SchemaOperator {
         },
       };
     },
-    'image-widget': (data: { type: any }) => {
+    'l-image': (data: { type: any }) => {
       return {
         id: uuid(),
         type: data.type,

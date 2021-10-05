@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Layout, Row, Col, Button } from 'antd';
 import HomeHeader from '@/views/home/components/header';
 import TemplateList from '@/views/home/components/templateList';
-import { TemplateProps } from '@/types/respType';
 import { Link } from 'react-router-dom';
+import { PageData } from "@/store/context"
 import { getTemplates } from "@/api"
 import style from './index.less';
 
@@ -38,14 +38,21 @@ const welcomeList: Welcome[] = [
   },
 ];
 
+
+export type TemplateProps = Required<Omit<PageData, 'props' | 'setting'>>
+
 const Index: React.FC = () => {
-  let [templates, setList] = useState<TemplateProps[]>([])
+  let [templates, setList] = useState([])
+
   useEffect(() => {
-    getTemplates({ pageIndex: 0, pageSize: 8 }).then((res: any) => {
-      console.log(res);
-      setList(res.list)
-    })
+    getTemplateList()
   }, [])
+
+  const getTemplateList = async () => {
+    const { data } = await getTemplates({ pageIndex: 0, pageSize: 8 })
+    setList(data.list)
+  }
+
 
   return (
     <div className={style.content}>

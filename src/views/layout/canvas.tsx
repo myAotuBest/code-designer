@@ -5,7 +5,7 @@
 //   useContext,
 //   useCallback,
 // } from 'react';
-// import { IComponentData } from '@/store/context';
+// import { ComponentData } from '@/store/context';
 
 // import EditWrapper from '@/components/editWrapper';
 // import componentMap from '@/types/componentMap';
@@ -72,7 +72,7 @@
 //                 // style={{ background: backgroundColor }}
 //                 id="canvas-area"
 //             >
-//                 {components.map((item: IComponentData) => {
+//                 {components.map((item: ComponentData) => {
 //                     const Component = componentMap[item.type].component as unknown as any;
 //                     return !item.isHidden ? (
 //                         // <EditWrapper

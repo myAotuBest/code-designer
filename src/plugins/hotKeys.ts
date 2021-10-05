@@ -1,12 +1,12 @@
 // import { v4 as uuidv4 } from 'uuid';
-// import { IComponentData } from '@/types/componentData';
+// import { ComponentData } from '@/types/componentData';
 // import { componentDataAtom, historyAtom, historyIndexAtom, currentElementAtom, HistoryProps } from '@/store/atorms/global';
 // import { useHotkeys } from 'react-hotkeys-hook'
 // import { message } from 'antd';
 // import { cloneDeep } from 'lodash-es'
 // import { insertAt } from '@/util'
 // export const initUseKeys = () => {
-//     let copyComponents: IComponentData
+//     let copyComponents: ComponentData
 
 //     // 粘贴图层
 //     useHotkeys('ctrl+c, command+c', () => {
@@ -92,7 +92,7 @@
 //         if (historyIndex < 0) return
 //         const history = historyList[historyIndex] as HistoryProps
 //         // console.log(historyList)
-//         let newData: IComponentData[] = []
+//         let newData: ComponentData[] = []
 //         switch (history.type) {
 //             case 'add':
 //                 newData = componentData.filter(componet => componet.id !== history.componentId)
@@ -145,7 +145,6 @@ const wrap = (callback: KeyHandler) => {
 
 export default function initHotKeys() {
   const { state, dispatch } = useContext<IContextProps>(AppContext);
-  console.log(state);
 
   useHotKey('ctrl+c, command+c', () => {
     dispatch({

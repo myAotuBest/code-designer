@@ -19,11 +19,11 @@ const componentMap: IComponentToFrom = {
     name: '容器组件组件',
     component: ContainerWidget,
   },
-  'text-widget': {
+  'l-text': {
     name: '文本组件',
     component: TextWidget,
   },
-  'image-widget': {
+  'l-image': {
     name: '图片组件',
     component: ImageWidget,
   },

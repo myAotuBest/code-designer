@@ -1,6 +1,8 @@
-export interface RespData<T> {
-    error: number;
+import { PageData, PageProps, ComponentData } from "@/store/context"
+export interface RespData<T = {}> {
+    errno: number;
     data: T;
+    message?: string
 }
 
 export interface ListData<T> {
@@ -8,12 +10,12 @@ export interface ListData<T> {
     count: number;
 };
 
-export type RespListData<T> = RespData<ListData<T>>
-
-export interface TemplateProps {
-    id: number;
-    coverImg: string;
-    title: string;
-    author: string;
-    copiedCount: number;
+export interface WorkData extends Omit<PageData, "props"> {
+    content: {
+        components: ComponentData[],
+        props?: PageProps
+    }
 }
+
+export type RespListData<T> = RespData<ListData<T>>
+export type RespWorkData = RespData<WorkData>

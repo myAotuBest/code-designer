@@ -9,13 +9,17 @@ server.use(jsonServer.rewriter({
 server.use(middlewares)
 server.use(router)
 router.render = (req, res) => {
-    res.jsonp({
-        error: 0,
-        data: {
-            list: res.locals.data,
-            count: res.locals.data.length
-        }
-    })
+    if (req.originalUrl.indexOf("works")) {
+        res.jsonp(res.locals.data)
+    } else {
+        res.jsonp({
+            errno: 0,
+            data: {
+                list: res.locals.data,
+                count: res.locals.data.length
+            }
+        })
+    }
 }
 server.listen(3000, () => {
     console.log('JSON Server is running')

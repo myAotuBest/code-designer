@@ -1,19 +1,22 @@
 import React, { memo, useCallback, useContext, useEffect } from 'react';
 import { Layout, Tabs, Empty } from 'antd';
+import { useParams } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid';
 import HeaderBase from './header';
 import EditGroup from './setting-area/edit';
 import LayerList from './setting-area/layer';
 import PropsTable from '@/components/propsTable';
-import { IComponentData } from '@/store/context';
+import { ComponentData } from '@/store/context';
 import componentMap from '@/types/componentMap';
 import EditWrapper from '@/components/editWrapper';
 import { initHotKeys, initContextMenu } from '@/plugins';
+import { fetchWork } from "@/api"
 import {
   SETACTIVE,
   ADDCOMPONENT,
   UPDATECOMPONENT,
   UPDATEPAGE,
+  FETCHWORk
 } from '@/store/contant';
 import { AppContext, IContextProps } from '@/store/context';
 import mockComponentList from '@/mock/component-list';
@@ -28,19 +31,33 @@ const { TabPane } = Tabs;
 const BaseLayout: React.FC = () => {
   const { state, dispatch } = useContext<IContextProps>(AppContext);
   const { currentElement, components, page } = state;
+  console.log("components", components);
 
-  let filterComponents: IComponentData[] =
-    components.filter((data: IComponentData) => data.id === currentElement) ||
+  let filterComponents: ComponentData[] =
+    components.filter((data: ComponentData) => data.id === currentElement) ||
     [];
-  const currentComponentData: IComponentData = filterComponents.length
+  const currentComponentData: ComponentData = filterComponents.length
     ? filterComponents[0]
-    : ({} as IComponentData);
+    : ({} as ComponentData);
 
   const isLocked = currentComponentData?.isLocked;
   const isHidden = currentComponentData?.isHidden;
 
   initHotKeys();
   initContextMenu();
+
+
+  useEffect(() => {
+    // const { id } = useParams()
+    fetchWork().then((res) => {
+      dispatch({
+        type: FETCHWORk,
+        data: {
+          value: res.data
+        }
+      })
+    })
+  }, [])
 
   // 设置当前选中元素
   const setActive = useCallback(
@@ -55,9 +72,9 @@ const BaseLayout: React.FC = () => {
     [currentElement, components]
   );
 
-  const addComponent = useCallback((item: IComponentData) => {
+  const addComponent = useCallback((item: ComponentData) => {
     console.log(item);
-    const component: IComponentData = {
+    const component: ComponentData = {
       id: uuidv4(),
       props: {
         ...item.props,
@@ -125,7 +142,7 @@ const BaseLayout: React.FC = () => {
           style={{ padding: '24px 0', height: '100%' }}
         >
           <Sider theme="light" width={400} className={styles.componentList}>
-            {mockComponentList.map((item: IComponentData) => {
+            {mockComponentList.map((item: ComponentData) => {
               return (
                 <div
                   key={item.id}
@@ -151,8 +168,8 @@ const BaseLayout: React.FC = () => {
                 style={{ ...page.props }}
                 id="canvas-area"
               >
-                {components.map((item: IComponentData) => {
-                  const Component = componentMap[item.type]
+                {components.map((item: ComponentData) => {
+                  const Component = componentMap[item.name]
                     .component as unknown as any;
                   return !item.isHidden ? (
                     <EditWrapper

@@ -3,7 +3,7 @@ enum WidgetType {
   container = 'container-widget',
   text = 'txt-widget',
   link = 'link-widget',
-  image = 'image-widget',
+  image = 'l-image',
   input = 'input-widget',
   radio = 'radio-widget',
   checkbox = 'checkbox-widget',

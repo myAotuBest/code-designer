@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { message } from 'antd';
 import { AppContext, IEditorProps } from './context';
 import { getComponentState } from '@/util/store';
-import { IComponentData } from './context';
+import { ComponentData } from './context';
 import * as actionTypes from './contant';
 
 const pageDefaultProps = {
@@ -16,13 +16,13 @@ const pageDefaultProps = {
 };
 export type MoveDirection = 'Up' | 'Down' | 'Left' | 'Right';
 
-const cacheData: IEditorProps = getComponentState();
+// const cacheData: IEditorProps = getComponentState();
 
 const initState: IEditorProps = {
-  components: cacheData.components || [],
+  components: [],
   currentElement: '',
   page: {
-    props: cacheData.page?.props || pageDefaultProps,
+    props: pageDefaultProps,
     title: 'test title',
   },
   copiedComponent: null,
@@ -57,7 +57,7 @@ const reducer = (state: IEditorProps, action: ActionType) => {
         currentElement: value,
       };
     case actionTypes.ADDCOMPONENT:
-      (value as IComponentData).layerName = `图层${state.components.length + 1
+      (value as ComponentData).layerName = `图层${state.components.length + 1
         }`;
       components = components.concat(value);
       return {
@@ -77,7 +77,7 @@ const reducer = (state: IEditorProps, action: ActionType) => {
       };
     case actionTypes.UPDATECOMPONENT:
       let newData = [...state.components];
-      newData = newData.map((data: IComponentData) => {
+      newData = newData.map((data: ComponentData) => {
         if (currentElementId === data.id) {
           if (isRoot) {
             return {
@@ -176,7 +176,7 @@ const reducer = (state: IEditorProps, action: ActionType) => {
             break;
         }
         // 进行属性合并
-        components = components.map((data: IComponentData) => {
+        components = components.map((data: ComponentData) => {
           if (currentElementId === data.id) {
             return {
               ...data,
@@ -194,6 +194,17 @@ const reducer = (state: IEditorProps, action: ActionType) => {
         };
       }
       return state;
+    case actionTypes.FETCHWORk:
+      const newState = { ...state }
+      let { content, ...rest } = value
+      newState.page = { ...newState.page, ...rest }
+      if (content.props) {
+        newState.page.props = content.props
+      }
+      newState.components = content.components
+      return {
+        ...newState
+      }
     default:
       return state;
   }

@@ -16,3 +16,6 @@ export const MOVECOMPONENT = 'moveComponent';
 export const UPDATECOMPONENT = 'updateComponent';
 /** 修改页面 */
 export const UPDATEPAGE = 'updatePage';
+
+// 回填数据
+export const FETCHWORk = "fetchWork"

@@ -10,7 +10,7 @@ interface RouteConfig extends RouteProps {
 const Login = lazy(() => import('@/views/login'))
 const Index = lazy(() => import('@/views/home'))
 const Detail = lazy(() => import('@/views/detail'))
-const Design = lazy(() => import('@/views/design'))
+const Design = lazy(() => import('@/views/layout'))
 
 export const routes: RouteConfig[] = [
   {
@@ -23,21 +23,14 @@ export const routes: RouteConfig[] = [
     path: '/index',
     name: '首页',
     component: Index,
-    children: [
-      {
-        path: '/detail/:id',
-        name: '详情',
-        component: Detail
-      },
-    ]
   },
   {
     path: '/detail/:id',
     name: '详情',
-    component: Detail,
+    component: Detail
   },
   {
-    path: '/design',
+    path: '/design/:id',
     name: '设计',
     component: Design,
   },

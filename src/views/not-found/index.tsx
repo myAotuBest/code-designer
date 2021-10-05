@@ -1,7 +1,12 @@
 import React, { ReactElement } from 'react';
-
+import { Result, Button } from 'antd';
 export default class NotFound extends React.Component<any, any> {
   render(): ReactElement {
-    return <div>路由不正确或者未找到需要加载的组件</div>;
+    return <Result
+      status="404"
+      title="404"
+      subTitle="Sorry, the page you visited does not exist."
+      extra={<Button type="primary">Back Home</Button>}
+    />
   }
 }

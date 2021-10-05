@@ -24,9 +24,9 @@ export function getFormConfig(widgetType: string): FormConfig[] {
   const dict: DynamicObject = {
     page: pageFormConfig,
     'container-widget': containerFormConfig,
-    'image-widget': imgFormConfig,
+    'l-image': imgFormConfig,
     'list-widget': listFormConfig,
-    'text-widget': textFormConfig,
+    'l-text': textFormConfig,
   };
   return dict[widgetType];
 }

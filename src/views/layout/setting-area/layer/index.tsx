@@ -7,7 +7,7 @@ import {
   UnlockOutlined,
 } from '@ant-design/icons';
 import LnlineEdit from '@/components/lnlineEdit';
-import { IComponentData } from '@/store/context';
+import { ComponentData } from '@/store/context';
 import {
   DragDropContext,
   Droppable,
@@ -35,19 +35,19 @@ const LayerList: React.FC<Iprops> = ({ setActive, updateComponent }) => {
     // 设置选中项
     const selectItem = (
       e: MouseEvent<HTMLDivElement>,
-      item: IComponentData
+      item: ComponentData
     ) => {
       e.preventDefault();
       setActive(item.id);
     };
 
     // TODO 拖动操作、留给林老哥改
-    const onDragUpdate = (result: DropResult) => {};
+    const onDragUpdate = (result: DropResult) => { };
     const onDragEnd = (result: DropResult) => {
       // console.log(result)
       const { source, destination } = result;
       if (!destination) return;
-      let arr: IComponentData[] = [...components];
+      let arr: ComponentData[] = [...components];
       // arr[0].
       const [remove] = arr.splice(source.index, 1);
       arr.splice(destination.index, 0, remove);
@@ -64,7 +64,7 @@ const LayerList: React.FC<Iprops> = ({ setActive, updateComponent }) => {
             <Droppable droppableId="droppable">
               {(provided, snapshot) => (
                 <div ref={provided.innerRef} {...provided.droppableProps}>
-                  {components.map((item: IComponentData, index: number) => {
+                  {components.map((item: ComponentData, index: number) => {
                     return (
                       <Draggable
                         key={item.id}
