@@ -1,7 +1,8 @@
-import React, { Fragment, memo, useCallback, useContext, useEffect } from 'react';
+import React, { Fragment, memo, useCallback, useContext, useEffect, useRef } from 'react';
 import { Layout, Tabs, Empty, Menu, Button } from 'antd';
 import { Link, useParams, withRouter, Prompt } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid';
+import html2canvas from "html2canvas"
 import EditGroup from './setting-area/edit';
 import LnlineEdit from "@/components/lnlineEdit"
 import LayerList from './setting-area/layer';
@@ -13,6 +14,7 @@ import LText from "@/components/widgets/LText"
 import { initHotKeys, initContextMenu } from '@/plugins';
 import { TextComponentProps } from "@/types/defaultProps"
 import { fetchWork, fetchSaveWork } from "@/api"
+import { takeScreenshotAndUpload } from "@/util"
 import {
   SETACTIVE,
   ADDCOMPONENT,
@@ -23,9 +25,9 @@ import {
 import { AppContext, IContextProps } from '@/store/context';
 import mockComponentList from '@/mock/component-list';
 
-import styles from './index.less';
 
-import './index.less';
+import classNames from 'classnames';
+import styles from './index.less';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { TabPane } = Tabs;
@@ -33,7 +35,7 @@ const { TabPane } = Tabs;
 const BaseLayout: React.FC = () => {
   const { state, dispatch } = useContext<IContextProps>(AppContext);
   const { currentElement, components, page } = state;
-
+  const canvasFix = useRef<boolean>(false) // 修复截图时有黑色阴影的bug
   let filterComponents: ComponentData[] =
     components.filter((data: ComponentData) => data.id === currentElement) ||
     [];
@@ -140,8 +142,26 @@ const BaseLayout: React.FC = () => {
     fetchSaveWork(payload)
   }, [page])
 
+  const publish = () => {
+    // 1、取消选中
+    setActive("")
+    // 2、取消 box-shadow 为 none
+    canvasFix.current = true
+    const el = document.getElementById("canvas-area") as HTMLDivElement
+    setTimeout(async () => {
+      html2canvas(el, { width: 375, useCORS: true, scale: 1 }).then(canvas => {
+        const image = document.getElementById("test-image") as HTMLImageElement
+        image.src = canvas.toDataURL()
+        canvasFix.current = false
+      })
+      // 3、上传并展示
+      // const { data } = await takeScreenshotAndUpload(el)
+    }, 0);
+
+  }
+
   return (
-    <Layout className="layout">
+    <Layout className={classNames(styles['editor-container'], "layout")}>
       <Header className={styles.header}>
         <div className={styles["page-title"]}>
           <Link to="/">
@@ -152,17 +172,12 @@ const BaseLayout: React.FC = () => {
         <Menu mode="horizontal" theme="dark">
           <Menu.Item key="preview"><Button type="primary">预览和设置</Button></Menu.Item>
           <Menu.Item key="saveWork"><Button type="primary" onClick={saveWork}>保存</Button></Menu.Item>
-          <Menu.Item key="publish"><Button type="primary">发布</Button></Menu.Item>
+          <Menu.Item key="publish"><Button type="primary" onClick={publish}>发布</Button></Menu.Item>
         </Menu>
       </Header>
-      <Content
-        style={{ padding: '0 50px', height: 'calc(100vh - 64px - 70px)' }}
-      >
-        <Layout
-          className="site-layout-background"
-          style={{ padding: '24px 0', height: '100%' }}
-        >
-          <Sider theme="light" width={300} className={styles.componentList}>
+      <Layout>
+        <Sider theme="light" width={300} className={styles.componentList}>
+          <div className='sidebar-container'>
             {mockComponentList.map((item: TextComponentProps, index) => {
               return (
                 <div
@@ -174,17 +189,15 @@ const BaseLayout: React.FC = () => {
                 </div>
               );
             })}
-          </Sider>
-          <Content
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              minHeight: 280,
-            }}
-          >
-            <div className={styles.content}>
+            <img src="" style={{ width: 300 }} id="test-image" />
+          </div>
+        </Sider>
+        <Layout className="site-layout" style={{ padding: '0 24px 24px' }} >
+          <Content>
+            <div className={classNames({ "canvas-fix": canvasFix.current }, styles['preview-container'])}>
+              <p>画布区域</p>
               <div
-                className={styles['canvas-area']}
+                className={styles['preview-list']}
                 style={{ ...page.props }}
                 id="canvas-area"
               >
@@ -207,41 +220,41 @@ const BaseLayout: React.FC = () => {
               </div>
             </div>
           </Content>
-          <Sider theme="light" width={300} style={{ overflow: 'auto' }} className="pane-setting">
-            <Tabs defaultActiveKey="1">
-              <TabPane tab="组件属性" key="formProps">
-                {currentElement && <Fragment>
-                  {!isLocked ? (
-                    <EditGroup
-                      currentElement={currentElement}
-                      updateComponent={updateComponent}
-                      props={currentComponentData?.props}
-                    />
-                  ) : (
-                    <Empty
-                      description={
-                        isHidden ? '已隐藏，暂无法编辑' : '已锁定，暂无法编辑'
-                      }
-                    />
-                  )}
-                </Fragment>}
-              </TabPane>
-              <TabPane tab="图层设置" key="layer">
-                <LayerList
-                  setActive={setActive}
-                  updateComponent={updateComponent}
-                />
-              </TabPane>
-              <TabPane tab="页面设置" key="pageSetting">
-                <PropsTable onChange={updatePage} props={page.props} />
-              </TabPane>
-              <TabPane tab="数据源" key="dataSource">
-                Content of Tab Pane 2
-              </TabPane>
-            </Tabs>
-          </Sider>
         </Layout>
-      </Content>
+        <Sider theme="light" width={300} style={{ overflow: 'auto' }} className="pane-setting">
+          <Tabs defaultActiveKey="1">
+            <TabPane tab="组件属性" key="formProps">
+              {currentElement && <Fragment>
+                {!isLocked ? (
+                  <EditGroup
+                    currentElement={currentElement}
+                    updateComponent={updateComponent}
+                    props={currentComponentData?.props}
+                  />
+                ) : (
+                  <Empty
+                    description={
+                      isHidden ? '已隐藏，暂无法编辑' : '已锁定，暂无法编辑'
+                    }
+                  />
+                )}
+              </Fragment>}
+            </TabPane>
+            <TabPane tab="图层设置" key="layer">
+              <LayerList
+                setActive={setActive}
+                updateComponent={updateComponent}
+              />
+            </TabPane>
+            <TabPane tab="页面设置" key="pageSetting">
+              <PropsTable onChange={updatePage} props={page.props} />
+            </TabPane>
+            <TabPane tab="数据源" key="dataSource">
+              Content of Tab Pane 2
+            </TabPane>
+          </Tabs>
+        </Sider>
+      </Layout>
       <Footer style={{ textAlign: 'center' }}>
         Ant Design ©2018 Created by Ant UED
       </Footer>

@@ -1,35 +1,32 @@
-import React, { FunctionComponent, Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
 } from 'react-router-dom';
 import EditorContext from '@/store/index';
-import { routes } from '@/router';
+import NotFound from '@/views/not-found';
+
+const Login = lazy(() => import('@/views/login'))
+const Index = lazy(() => import('@/views/home'))
+const Design = lazy(() => import('@/views/layout'))
 import './styles'
 
 const App = (): React.ReactElement => {
-  const routeComponents = routes.map((item) => {
-    const FunComponent: FunctionComponent = item.component as FunctionComponent;
-    return (
-      <Route path={item.path} exact>
-        {item.redirect ? (
-          <Redirect to={item.redirect} />
-        ) : (
-          <Suspense fallback={'loading...'}>
-            <FunComponent />
-          </Suspense>
-        )}
-      </Route>
-    );
-  });
+
   return (
     <EditorContext>
-      <Router>
-        <Switch>{routeComponents}</Switch>
-      </Router>
+      <Suspense fallback={'loading...'}>
+        <Router>
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/design/:id" component={Design} />
+            <Route path="/" component={Index}></Route>
+            <Route path="*" component={NotFound}></Route>
+          </Switch>
+        </Router>
+      </Suspense>
     </EditorContext>
   );
 };

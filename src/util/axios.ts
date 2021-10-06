@@ -37,9 +37,13 @@ export function get(url: string, params?: object) {
 }
 
 export function post(url: string, data?: object) {
-    return instance.post(url, data, { method: "post" })
+    return instance.post(url, data)
 }
 
-export function patch(url: string, data: object) {
-    return instance.patch(url, data, { method: "patch" })
+export function patch(url: string, data?: object) {
+    return instance.patch(url, data)
+}
+
+export function del(url: string, data?: object) {
+    return instance.delete(url, data)
 }

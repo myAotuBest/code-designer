@@ -1,61 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { Layout, Row, Col, Button } from 'antd';
-import HomeHeader from '@/views/home/components/header';
-import TemplateList from '@/views/home/components/templateList';
+import React, { lazy } from 'react';
+import { Layout, Button } from 'antd';
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { PageData } from "@/store/context"
-import { getTemplates } from "@/api"
 import style from './index.less';
 
 import JiQiRen from '../../assets/qijiren.png';
-import HTML5 from '../../assets/html5.png';
-import Build from '../../assets/build.png';
-import Bulb from '../../assets/bulb.png';
 
 const { Header, Content, Footer } = Layout;
 
-interface Welcome {
-  image: string;
-  title: string;
-  subtitle: string;
-}
-
-const welcomeList: Welcome[] = [
-  {
-    image: HTML5,
-    title: '专注H5 始终如一',
-    subtitle: '三年保持行业领先',
-  },
-  {
-    image: Build,
-    title: '海量 H5 模版',
-    subtitle: '一键生成，一分钟轻松制作',
-  },
-  {
-    image: Bulb,
-    title: '极致体验',
-    subtitle: '用户的一致选择',
-  },
-];
-
+const Home = lazy(() => import("@/views/home/home"))
+const Template = lazy(() => import('@/views/detail'))
 
 export type TemplateProps = Required<Omit<PageData, 'props' | 'setting'>>
 
-const Index: React.FC = () => {
-  let [templates, setList] = useState([])
-
-  useEffect(() => {
-    getTemplateList()
-  }, [])
-
-  const getTemplateList = async () => {
-    const { data } = await getTemplates({ pageIndex: 0, pageSize: 8 })
-    setList(data.list)
-  }
-
-
+const Index: React.FC = (props) => {
   return (
-    <div className={style.content}>
+    <Layout className="layout" style={{ background: "#fff" }}>
       <Header className={style.nav}>
         <div className={style.logo}>
           <img src={JiQiRen} />
@@ -65,33 +26,17 @@ const Index: React.FC = () => {
           <Link to="/login">登录</Link>
         </Button>
       </Header>
-      <Layout>
-        <Content style={{ backgroundColor: '#fff' }}>
-          <HomeHeader />
-          <Row className={style.welcome}>
-            {welcomeList.map((item: Welcome, index: number) => {
-              return (
-                <Col key={index} span={8} className={style.item}>
-                  <img src={item.image} />
-                  <h3>{item.title}</h3>
-                  <p>{item.subtitle}</p>
-                </Col>
-              );
-            })}
-          </Row>
-          <div className={style.templateList}>
-            <div className={style.hotTitle}>
-              <h2>热门海报</h2>
-              <p>只需替换文字和图片，一键自动生成H5</p>
-            </div>
-            <TemplateList templateList={templates} />
-          </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          A hard-working code farm robot ©2021 Created by Robot
-        </Footer>
-      </Layout>
-    </div>
+      <Content className="site-layout" style={{ marginTop: 64 }}>
+        <Switch>
+          <Route exact path="/template/:id" component={Template} />
+          <Route exact path="/home" component={Home} />
+          <Redirect to="/home" />
+        </Switch>
+      </Content>
+      <Footer style={{ textAlign: 'center' }}>
+        A hard-working code farm robot ©2021 Created by Robot
+      </Footer>
+    </Layout>
   );
 };
 export default Index;

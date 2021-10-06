@@ -11,7 +11,7 @@ interface IProps {
 
 const TemplateList: React.FC<IProps> = (props) => {
   return (
-    <div className={style.component}>
+    <div className={style['content-container']}>
       <Row gutter={16}>
         {props.templateList.length && props.templateList.map((item: TemplateProps) => {
           return (
@@ -24,7 +24,7 @@ const TemplateList: React.FC<IProps> = (props) => {
                       <img src={item.coverImg} />
                       <div className={style.hoverItem}>
                         <Button size="large" type="primary">
-                          <Link to="/detail/1">使用该模版创建</Link>
+                          <Link to="/template/1">使用该模版创建</Link>
                         </Button>
                       </div>
                     </div>

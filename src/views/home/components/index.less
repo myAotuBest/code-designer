@@ -1,106 +1,53 @@
-.header {
-  display: flex;
-  position: relative;
-  height: 450px;
+.content-container {
+  background: #fff;
+  padding: 0 24px 24px 30px;
+  min-height: 85vh;
+  max-width: 1200px;
+  margin: 50px auto;
   width: 100%;
-  overflow: hidden;
-  background-image: url('https://oss.imooc-lego.com/editor/img/background.3744875e.png');
-  -o-object-fit: cover;
-  object-fit: cover;
+}
 
-  // .nav {
-  //     width          : 100%;
-  //     display        : flex;
-  //     justify-content: space-between;
-  //     align-items    : center;
-  //     z-index        : 10;
+.poster {
+  position: relative;
+  margin-bottom: 20px;
 
-  //     .logo {
-  //         display        : flex;
-  //         justify-content: center;
-  //         align-items    : center;
+  img {
+    width: 100%;
+    height: 390px;
+  }
 
-  //         img {
-  //             width       : 40px;
-  //             height      : 40px;
-  //             margin-right: 20px;
-  //         }
-
-  //         h2 {
-  //             color    : #ccc;
-  //             font-size: 25px;
-  //             margin   : 0;
-  //         }
-  //     }
-  // }
-
-  .text {
+  .hoverItem {
     position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
+    display: none;
+    background: rgba(0, 0, 0, 0.8);
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
 
-    .headline {
-      color: #fff;
-      text-shadow: 0 0 1px rgb(68 92 116 / 2%), 0 2px 8px rgb(57 76 96 / 15%);
-      font-size: 32px;
-    }
+  .description {
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 12px;
+    color: #999;
+  }
 
-    .search {
-      width: 360px;
-      border: 2px solid #40a9ff;
-      border-radius: 3px;
-    }
+  .number {
+    font-weight: bold;
   }
 }
 
-.component {
-  .poster {
-    position: relative;
-    margin-bottom: 20px;
+.poster:hover .hoverItem {
+  display: flex;
+}
 
-    img {
-      width: 100%;
-      height: 390px;
-    }
-
-    .hoverItem {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      display: none;
-      background: rgba(0, 0, 0, 0.8);
-      align-items: center;
-      justify-content: center;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-    }
-
-    .description {
-      display: flex;
-      justify-content: space-between;
-      padding: 13px 12px;
-      color: #999;
-    }
-
-    .number {
-      font-weight: bold;
-    }
-  }
-
-  .poster:hover .hoverItem {
-    display: flex;
-  }
-
-  .poster:hover img {
-    transform: scale(1.25);
-  }
+.poster:hover img {
+  transform: scale(1.25);
 }
 
 :global {
