@@ -1,8 +1,18 @@
 {
-  "name": "webpack-react",
-  "version": "1.0.0",
+  "name": "code-designer",
+  "version": "0.0.1",
+  "description": "code-designer 是一款在线海报图文编辑器、可以随意进行组合编辑、技术栈以react为主， 后台采用nodejs开发。",
   "main": "index.js",
   "license": "MIT",
+  "author": "xikun",
+  "homepage": "https://github.com/myAotuBest/code-designer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myAotuBest/code-designer"
+  },
+  "bugs": {
+    "url": "https://github.com/myAotuBest/code-designer/issues"
+  },
   "scripts": {
     "start": " NODE_ENV=development webpack serve",
     "server": "nodemon src/mock/mockServer localhost 8080",
@@ -74,6 +84,7 @@
     "path": "^0.12.7",
     "prettier": "^2.4.1",
     "react-test-renderer": "^17.0.2",
+    "readme-md-generator": "^1.0.0",
     "scripty": "^2.0.0",
     "style-loader": "^2.0.0",
     "swc-loader": "^0.1.14",
@@ -85,5 +96,9 @@
     "webpack-dev-server": "^3.11.2",
     "webpackbar": "^5.0.0-3",
     "yargs-parser": "^20.2.9"
+  },
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
   }
 }
